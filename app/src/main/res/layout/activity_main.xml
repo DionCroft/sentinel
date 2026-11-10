@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/windowBackground">
+
+    <!-- Top control bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary"
+        android:padding="8dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Wi-Fi Sentinel"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnScan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scan"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- Summary strip -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#263238"
+        android:padding="6dp">
+
+        <TextView android:id="@+id/summaryTotal"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="APs: 0"
+            android:textColor="#FFFFFF" android:textSize="12sp" android:gravity="center"/>
+        <TextView android:id="@+id/summarySuspicious"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="Susp: 0"
+            android:textColor="#FFD54F" android:textSize="12sp" android:gravity="center"/>
+        <TextView android:id="@+id/summaryOpen"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="Open: 0"
+            android:textColor="#81C784" android:textSize="12sp" android:gravity="center"/>
+        <TextView android:id="@+id/summaryStatus"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="2" android:text="Ready."
+            android:textColor="#B0BEC5" android:textSize="11sp" android:gravity="center"/>
+    </LinearLayout>
+
+    <!-- Tab bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#37474F">
+
+        <Button android:id="@+id/tabLive"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="Live" android:textSize="12sp"/>
+        <Button android:id="@+id/tabRadar"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="Radar" android:textSize="12sp"/>
+        <Button android:id="@+id/tabAlerts"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="Alerts" android:textSize="12sp"/>
+        <Button android:id="@+id/tabHistory"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="History" android:textSize="12sp"/>
+        <Button android:id="@+id/tabSurvey"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="Survey" android:textSize="12sp"/>
+    </LinearLayout>
+
+    <!-- Content area (one child shown at a time) -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <!-- LIVE -->
+        <LinearLayout android:id="@+id/panelLive"
+            android:layout_width="match_parent" android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:padding="6dp">
+                <EditText android:id="@+id/filterText"
+                    android:layout_width="0dp" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:hint="Filter SSID/BSSID/vendor…"
+                    android:inputType="text" android:textSize="13sp"/>
+                <CheckBox android:id="@+id/suspiciousOnly"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Susp. only" android:textSize="12sp"/>
+            </LinearLayout>
+            <ListView android:id="@+id/liveList"
+                android:layout_width="match_parent" android:layout_height="0dp"
+                android:layout_weight="1" android:divider="#E0E0E0" android:dividerHeight="1dp"/>
+        </LinearLayout>
+
+        <!-- RADAR -->
+        <LinearLayout android:id="@+id/panelRadar"
+            android:layout_width="match_parent" android:layout_height="match_parent"
+            android:orientation="vertical" android:visibility="gone">
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:padding="6dp" android:gravity="center_vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Mode:" android:textSize="12sp"/>
+                <Spinner android:id="@+id/radarMode"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="  Top:" android:textSize="12sp"/>
+                <EditText android:id="@+id/radarCount"
+                    android:layout_width="48dp" android:layout_height="wrap_content"
+                    android:inputType="number" android:text="5" android:textSize="13sp"/>
+            </LinearLayout>
+            <com.cadmus.wifisentinel.RadarView android:id="@+id/radarView"
+                android:layout_width="match_parent" android:layout_height="0dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <!-- ALERTS -->
+        <LinearLayout android:id="@+id/panelAlerts"
+            android:layout_width="match_parent" android:layout_height="match_parent"
+            android:orientation="vertical" android:visibility="gone">
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="Alerts / anomalies" android:padding="6dp"
+                android:textStyle="bold" android:textSize="13sp"/>
+            <ScrollView android:layout_width="match_parent" android:layout_height="0dp"
+                android:layout_weight="1">
+                <TextView android:id="@+id/alertsText"
+                    android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:padding="8dp" android:textSize="12sp" android:lineSpacingExtra="4dp"/>
+            </ScrollView>
+        </LinearLayout>
+
+        <!-- HISTORY -->
+        <LinearLayout android:id="@+id/panelHistory"
+            android:layout_width="match_parent" android:layout_height="match_parent"
+            android:orientation="vertical" android:visibility="gone">
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:text="Device history (per BSSID)" android:padding="6dp"
+                android:textStyle="bold" android:textSize="13sp"/>
+            <ListView android:id="@+id/historyList"
+                android:layout_width="match_parent" android:layout_height="0dp"
+                android:layout_weight="1" android:divider="#E0E0E0" android:dividerHeight="1dp"/>
+        </LinearLayout>
+
+        <!-- SURVEY -->
+        <LinearLayout android:id="@+id/panelSurvey"
+            android:layout_width="match_parent" android:layout_height="match_parent"
+            android:orientation="vertical" android:visibility="gone">
+            <LinearLayout
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:padding="6dp" android:gravity="center_vertical">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="X:" android:textSize="12sp"/>
+                <EditText android:id="@+id/surveyX"
+                    android:layout_width="64dp" android:layout_height="wrap_content"
+                    android:inputType="numberDecimal|numberSigned" android:text="0" android:textSize="13sp"/>
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="  Y:" android:textSize="12sp"/>
+                <EditText android:id="@+id/surveyY"
+                    android:layout_width="64dp" android:layout_height="wrap_content"
+                    android:inputType="numberDecimal|numberSigned" android:text="0" android:textSize="13sp"/>
+                <Button android:id="@+id/btnCapture"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Capture" android:textSize="12sp"/>
+                <Button android:id="@+id/btnEstimate"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Estimate" android:textSize="12sp"/>
+                <Button android:id="@+id/btnClearSurvey"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Clear" android:textSize="12sp"/>
+            </LinearLayout>
+            <TextView android:id="@+id/surveyStatus"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:paddingHorizontal="8dp" android:textSize="11sp" android:textColor="#616161"/>
+            <com.cadmus.wifisentinel.SurveyView android:id="@+id/surveyView"
+                android:layout_width="match_parent" android:layout_height="0dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- Bottom action bar -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#455A64"
+        android:padding="4dp">
+
+        <Button android:id="@+id/btnBaselineAdd"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="Baseline+" android:textSize="11sp"/>
+        <Button android:id="@+id/btnBaselineAll"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="Baseline all" android:textSize="11sp"/>
+        <Button android:id="@+id/btnClearBaseline"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="Clear base" android:textSize="11sp"/>
+        <Button android:id="@+id/btnIgnore"
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_weight="1" android:text="Ignore" android:textSize="11sp"/>
+    </LinearLayout>
+</LinearLayout>

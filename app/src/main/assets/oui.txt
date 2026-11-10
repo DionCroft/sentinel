@@ -1,0 +1,63 @@
+# Bundled OUI vendor table (offline lookup).
+# Format: OUI (6 hex)  Vendor Name
+# Keep this list conservative: only OUIs with high confidence. The app
+# falls back to "Unknown" for anything not listed, and the full IEEE OUI
+# database (millions of entries) can be dropped in later by replacing
+# this file with the IANA "ieee-oui.txt" export.
+001A11  Google
+F4E27D  Intel
+0017F2  Cisco
+00265A  Cisco
+C00FEE  Cisco
+001C25  Apple
+001B63  Apple
+005043  Apple
+70B3D5  Apple
+3C22FB  Intel
+AC67B2  Intel
+001E64  Intel
+C83A35  TP-Link
+A4290A  TP-Link
+F0D5AD  TP-Link
+001E8C  TP-Link
+90B0ED  TP-Link
+4C92BF  TP-Link
+B827EB  Raspberry Pi
+DCA632  Raspberry Pi
+B4430D  Raspberry Pi
+E47520  Samsung
+0016CB  Samsung
+90B11C  Samsung
+C4A9CD  Samsung
+00805F  Espressif
+0024D7  Espressif
+240AC4  Espressif
+5C57BB  Espressif
+A483E7  Espressif
+2C3AE8  Espressif
+A020A6  Espressif
+F01F1D  Espressif
+30AEAC  Espressif
+00155D  Microsoft
+A0F3C1  Microsoft
+001B77  Microsoft
+001CC0  Microsoft
+001D41  Microsoft
+002215  Microsoft
+0026E4  Microsoft
+002722  Microsoft
+00274B  Microsoft
+00276B  Microsoft
+00278E  Microsoft
+0027E7  Microsoft
+002807  Microsoft
+002865  Microsoft
+00296B  Microsoft
+002AE9  Microsoft
+002C6C  Microsoft
+002D61  Microsoft
+002DA8  Microsoft
+002E0F  Microsoft
+002F0C  Microsoft
+002F83  Microsoft
+002FE7  Microsoft

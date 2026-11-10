@@ -1,0 +1,29 @@
+# Build output
+build/work/
+build/out/
+build/*.keystore
+*.apk
+*.ap_
+*.dex
+
+# Gradle (if added later)
+.gradle/
+build/intermediates/
+build/generated/
+local.properties
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+bin/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Java
+*.class
