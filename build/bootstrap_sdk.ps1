@@ -3,7 +3,7 @@
 # build-tools + platform needed to compile the APK. Idempotent.
 param(
     [string]$SdkRoot = "$env:LOCALAPPDATA\Android\Sdk",
-    [string]$BuildTools = "34.0.0",
+    [string]$BuildTools = "35.0.0",
     [string]$Platform = "android-34"
 )
 

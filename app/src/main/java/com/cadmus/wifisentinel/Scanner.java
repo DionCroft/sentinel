@@ -32,11 +32,11 @@ public final class Scanner {
         for (ScanResult r : results) {
             if (r.BSSID == null) continue;
             Ap ap = new Ap();
-            ap.ssid = (r.SSID == null || r.SSID.isEmpty()) ? "<hidden>" : r.SSSID;
+            ap.ssid = (r.SSID == null || r.SSID.isEmpty()) ? "<hidden>" : r.SSID;
             ap.bssid = r.BSSID.toLowerCase();
             ap.rssi = r.level;                       // dBm
             ap.freqMhz = r.frequency;                // MHz
-            ap.channel = r.channel;
+            ap.channel = WifiMath.freqToChannel(r.frequency);
             ap.security = WifiMath.normalizeSecurity(parseCaps(r.capabilities));
             ap.vendor = Store.lookupVendor(ctx, ap.bssid);
             ap.signalPct = WifiMath.rssiToQuality(ap.rssi);

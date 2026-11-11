@@ -2,7 +2,7 @@
 build/work/
 build/out/
 build/*.keystore
-*.apk
+# *.apk
 *.ap_
 *.dex
 
@@ -27,3 +27,6 @@ Thumbs.db
 
 # Java
 *.class
+
+# keep the built release APK
+!dist/*.apk

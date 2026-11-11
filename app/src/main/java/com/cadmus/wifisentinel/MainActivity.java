@@ -21,6 +21,7 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -78,7 +79,6 @@ public class MainActivity extends BaseSentinelActivity {
 
     @Override
     protected void onReady() {
-        super.onReady();
         setContentView(R.layout.activity_main);
         root = findViewById(R.id.root);
         bindViews();
@@ -250,12 +250,13 @@ public class MainActivity extends BaseSentinelActivity {
         summaryStatus.setText("Scanning…");
 
         new Thread(() -> {
-            final List<Ap> result;
+            List<Ap> result;
             try {
                 result = Scanner.scanOnce(this);
             } catch (Exception e) {
-                result = new ArrayList<>();
+                result = null;
             }
+            if (result == null) result = new ArrayList<>();
             final List<Ap> finalResult = result;
             handler.post(() -> {
                 applyScanResults(finalResult);
@@ -470,7 +471,7 @@ public class MainActivity extends BaseSentinelActivity {
 
                 String alias = aliases.getOrDefault(ap.bssid, "");
                 ssidView.setText(alias.isEmpty() ? ap.ssid : alias + " (" + ap.ssid + ")");
-                metaView.setText(ap.bssid + "  ·  " + ap.vendor + "  ·  " + ap.band + "  Ch " + ap.channel);
+                metaView.setText(ap.bssid + "  ·  " + ap.vendor + "  ·  " + ap.getBand() + "  Ch " + ap.channel);
                 rssiView.setText(ap.rssi + " dBm");
                 secView.setText(ap.security);
                 return row;
@@ -519,12 +520,12 @@ public class MainActivity extends BaseSentinelActivity {
                             .inflate(R.layout.row_history, parent, false);
                 }
                 HistoryRecord rec = items.get(position);
-                row.findViewById(R.id.histSsid).setText(
+                ((TextView) row.findViewById(R.id.histSsid)).setText(
                         rec.ssid == null ? "" : rec.ssid);
-                row.findViewById(R.id.histBssid).setText(rec.bssid);
-                row.findViewById(R.id.histSeen).setText("×" + rec.seenCount);
-                row.findViewById(R.id.histFirst).setText("First: " + (rec.firstSeen == null ? "-" : rec.firstSeen));
-                row.findViewById(R.id.histLast).setText("Last: " + (rec.lastSeen == null ? "-" : rec.lastSeen));
+                ((TextView) row.findViewById(R.id.histBssid)).setText(rec.bssid);
+                ((TextView) row.findViewById(R.id.histSeen)).setText("×" + rec.seenCount);
+                ((TextView) row.findViewById(R.id.histFirst)).setText("First: " + (rec.firstSeen == null ? "-" : rec.firstSeen));
+                ((TextView) row.findViewById(R.id.histLast)).setText("Last: " + (rec.lastSeen == null ? "-" : rec.lastSeen));
                 return row;
             }
         });
@@ -749,12 +750,6 @@ public class MainActivity extends BaseSentinelActivity {
         surveyEstimate = null;
         Toast.makeText(this, "Survey samples cleared", Toast.LENGTH_SHORT).show();
         refreshSurveyView();
-    }
-
-    /** Allow the user to set the survey target from the live list (long-press). */
-    @Override
-    protected void onReady() {
-        super.onReady();
     }
 }
 

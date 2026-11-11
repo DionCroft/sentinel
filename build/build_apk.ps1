@@ -6,7 +6,7 @@
 #   powershell -ExecutionPolicy Bypass -File build_apk.ps1 -SdkRoot <path> -OutDir <path>
 param(
     [string]$SdkRoot = "$env:LOCALAPPDATA\Android\Sdk",
-    [string]$BuildTools = "34.0.0",
+    [string]$BuildTools = "35.0.0",
     [string]$OutDir = ".",
     [string]$KeyStore = "",
     [string]$KeyAlias = "wifisentinel",
