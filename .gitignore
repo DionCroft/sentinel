@@ -30,3 +30,9 @@ Thumbs.db
 
 # keep the built release APK
 !dist/*.apk
+# scratch/debug scripts (not part of the build)
+build/debug_*.ps1
+build/check_*.ps1
+build/try_*.ps1
+build/verify*.ps1
+build/extract_*.ps1
